@@ -14,6 +14,23 @@ public class Citizen {
     
     Scanner sc = new Scanner(System.in);
     config conf = new config();
+    
+    public static void viewUsers() {
+                String usersQuery = "SELECT * FROM tbl_users";
+                String[] usersHeaders = {"id", "name", "age", "adrs", "contact", "email", "type"};
+                String[] usersColumns = {"u_id", "u_name","u_age", "u_address", "u_contact", "u_email", "u_type"};
+                config conf = new config();
+                conf.viewRecords(usersQuery, usersHeaders, usersColumns);
+            }
+    
+    public static void viewtable() {
+                String tableQuery = "SELECT * FROM tbl_event";
+                String[] tableHeaders = {"ed", "uid", "name", "duration", "max", "price"};
+                String[] tableColumns = {"e_id", "u_id","e_name", "e_duration", "e_duration", "e_price"};
+                config conf = new config();
+                conf.viewRecords (tableQuery, tableHeaders, tableColumns);
+          }
+
    
    public void Citizen(){
 
@@ -33,8 +50,7 @@ public class Citizen {
 
                                             switch (choice){
                                                 case 1:
-                                                    
-                                                    do{
+
                                                     viewUsers();
                                                     
                                                     System.out.println("Enter ID:");
@@ -47,20 +63,17 @@ public class Citizen {
                                                     emax = sc.nextInt();
                                                     System.out.println("Enter Price:");
                                                     eprice = sc.nextInt();
-                                                    System.out.println("Do to want to continue?: ");
-                                                    int con = sc.nextInt();
+
+                                                    System.out.println("Do to want to continue(Y =1 / N = 0)?: ");
+                                                    String con = sc.next().charAt(0) ;
                                                     
-                                                    }while(con = "Y" || con = "y"){
+                                                    while (con = "Y" || con = "y" ){
                                                         
                                                     String sql = "INSERT INTO tbl_event(u_id, e_name, e_duration, e_max, e_price) VALUES (?, ?, ?, ?, ?)";
                                                     conf.addRecord(sql, userid, ename, edu, emax, eprice);
-                                                   
-                                                    
+
                                                    }
-                                                    
-
-                                                    
-
+                
                                                 break;
 
                                                 case 2: 
@@ -80,7 +93,7 @@ public class Citizen {
                                                     System.out.println("Enter Price:");
                                                     eprice = sc.nextInt();
 
-                                                    sql = "UPDATE tbl_event SET u_id = ?, u_name = ?, u_eduration = ?, u_max =?, u_price = ? WHERE u_id = ?";
+                                                    String sql = "UPDATE tbl_event SET u_id = ?, u_name = ?, u_eduration = ?, u_max =?, u_price = ? WHERE u_id = ?";
                                                     conf.updateRecord(sql, userid, ename, edu, emax, eprice, eid );
 
                                                 break;
